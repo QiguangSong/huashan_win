@@ -1,2 +1,1 @@
-url http://www.gao008.com/
-fetch data and push notification to mobile
+data scrambling from rec
