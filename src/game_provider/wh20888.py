@@ -12,7 +12,7 @@ class wh_message(object):
     '''
     This module provides wuhu20888 functions
     '''
-    game_base_url = "http://www.qq1099.com"
+    game_base_url = "http://www.ee1088.com/"
 
     def __init__(self):
         '''
