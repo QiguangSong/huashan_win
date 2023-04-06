@@ -14,8 +14,8 @@ class huanshan_message(object):
     '''
     This module provides huanshan functions
     '''
-    game_base_url = "https://bbs.hszqb2.com/bbs-1.html"
-    FAV_LIST = ["华山小仙女", "东北球王"]
+    game_base_url = "https://bbs.hszqb2.com/"
+    FAV_LIST = ["松赞干布", "清欢啊"]
 
     def __init__(self):
         '''
@@ -36,15 +36,15 @@ class huanshan_message(object):
             now = datetime.now() - timedelta(hours=6, minutes=10)
 
             now_int = int(now.strftime("%Y%m%d%H%M%S"))
-            print("date and time ==========================", str(now_int))
+            # print("date and time ==========================", str(now_int))
             for li_item in li_list:
                 if len(li_item.contents) > 3:
                     message_time = int(''.join(re.findall(r'[0-9]+', li_item.contents[-2].text)))
-                    game_name = li_item.contents[-3].text
+                    provider_name = li_item.contents[-3].text
                     message_context = li_item.contents[-5].text
-                    if game_name in self.FAV_LIST and message_time > now_int:
+                    if provider_name in self.FAV_LIST:
                         print("time = " + str(message_time))  # time
-                        print("name = " + game_name)  # name
+                        print("name = " + provider_name)  # name
                         print("message = " + message_context)  # message
                         print("---------------")
         return li_list
