@@ -9,14 +9,14 @@ import requests as requests
 import unittest
 from bs4 import BeautifulSoup
 import re
-
+from ..common.huashancommon import huashan_common
 
 class huanshan_message(object):
     '''
     This module provides huanshan functions
     '''
     game_base_url = "https://bbs.hszqb2.com/"
-    FAV_LIST = ["清欢啊"]
+    FAV_LIST = ["波盘"]
 
     def __init__(self):
         '''
@@ -40,12 +40,15 @@ class huanshan_message(object):
             # print("date and time ==========================", str(now_int))
             for li_item in li_list:
                 if len(li_item.contents) > 3:
-                    message_time = int(''.join(re.findall(r'[0-9]+', li_item.contents[-2].text)))
+                    message_time_gmt = int(''.join(re.findall(r'[0-9]+', li_item.contents[-2].text)))
+                    huashan_common_inst = huashan_common()
+                    message_time_cet = huashan_common_inst.time_convert (str(message_time_gmt))
                     provider_name = li_item.contents[-3].text
                     message_context = li_item.contents[-5].text
                     message_link = urljoin (self.game_base_url, li_item.contents[-5].attrs['href'])
                     if provider_name in self.FAV_LIST:
-                        print("time = " + str(message_time))  # time
+                        print("time = " + str(message_time_gmt))  # time
+                        print("time = " + str(message_time_cet))  # time
                         print("name = " + provider_name)  # name
                         print("message = " + message_context)  # message
                         print("---------------")
